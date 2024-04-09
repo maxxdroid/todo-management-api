@@ -3,7 +3,6 @@ package com.example.todomanagement.controller;
 import com.example.todomanagement.dto.TodoDto;
 import com.example.todomanagement.services.TodoService;
 import lombok.AllArgsConstructor;
-import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -43,8 +42,15 @@ public class TodoController {
     //Build Update Todo REST API
     @PutMapping("{id}")
     public ResponseEntity<TodoDto> updateTodo(@RequestBody TodoDto todoDto, @PathVariable("id") Long id) {
-        TodoDto updatedTodoDto = todoService.updateTod(todoDto, id);
+        TodoDto updatedTodoDto = todoService.updateTodo(todoDto, id);
         return ResponseEntity.ok(updatedTodoDto);
+    }
+
+    //Build delete Todo REST API
+    @DeleteMapping("{id}")
+    public ResponseEntity<TodoDto> deleteTodo(@RequestBody TodoDto todoDto, @PathVariable("id") Long id) {
+        TodoDto deletedTodoDto = todoService.deleteTodo(todoDto, id);
+        return ResponseEntity.ok(deletedTodoDto);
     }
 
 }
