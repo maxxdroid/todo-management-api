@@ -31,12 +31,7 @@ public class SpringSecurityConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http.csrf().disable().authorizeHttpRequests((authorize) ->{
-//            authorize.requestMatchers(HttpMethod.POST, "api/**").hasRole("ADMIN");
-//            authorize.requestMatchers(HttpMethod.PUT, "api/**").hasRole("ADMIN");
-//            authorize.requestMatchers(HttpMethod.DELETE, "api/**").hasRole("ADMIN");
-//            authorize.requestMatchers(HttpMethod.POST, "api/**").hasAnyRole("ADMIN", "USER");
-//            authorize.requestMatchers(HttpMethod.PATCH, "api/**").hasAnyRole("ADMIN", "USER");
-//            authorize.requestMatchers(HttpMethod.GET, "api/**").permitAll();
+            authorize.requestMatchers("api/auth/**").permitAll();
             authorize.anyRequest().authenticated();
         }).httpBasic(Customizer.withDefaults());
 
@@ -48,18 +43,4 @@ public class SpringSecurityConfig {
         return configuration.getAuthenticationManager();
     }
 
-//    @Bean
-//    public UserDetailsService userDetailsService() {
-//        UserDetails max = User.builder()
-//                .username("max")
-//                .password(passwordEncoder().encode("password"))
-//                .roles("USER").build();
-//
-//        UserDetails admin = User.builder()
-//                .username("admin")
-//                .password(passwordEncoder().encode("admin"))
-//                .roles("ADMIN").build();
-//
-//        return new InMemoryUserDetailsManager(max, admin);
-//    }
 }
